@@ -1,0 +1,45 @@
+[
+  {
+    "id": 1,
+    "title": "Project One",
+    "excerpt": "A responsive UI component library.",
+    "image": "assets/images/project1.jpg",
+    "tags": ["HTML", "CSS", "JS"],
+    "designNotes": "Typography scale 6/9/12, color tokens, iconography; moodboard in Figma; design system docs.",
+    "designTags": ["Visual Design", "Design System", "Typography"],
+    "typography": "Inter, 16px base, 1.5x line height",
+    "designAssets": ["style-guide.pdf", "moodboard.pdf"]
+  },
+  {
+    "id": 2,
+    "title": "Project Two",
+    "excerpt": "Accessible dashboard for analytics.",
+    "image": "assets/images/project2.jpg",
+    "tags": ["React", "A11y"],
+    "designNotes": "Readable charts, high-contrast palette, typography hierarchy.",
+    "designTags": ["UI Design", "Color Theory"],
+    "typography": "System UI, 15px base, 1.6x line height",
+    "designAssets": ["dashboard-style.pdf"]
+  },
+  {
+    "id": 3,
+    "title": "Project Three",
+    "excerpt": "E-commerce product grid with filters.",
+    "image": "assets/images/project3.jpg",
+    "tags": ["CSS Grid", "JavaScript"],
+    "designNotes": "Product grid balanced visuals; iconography and micro-interactions in style guide.",
+    "designTags": ["UI Design", "Iconography"],
+    "designAssets": ["product-grid-guide.pdf"]
+  },
+  {
+    "id": 4,
+    "title": "Project Four",
+    "excerpt": "Portfolio site with dark mode.",
+    "image": "assets/images/project4.jpg",
+    "tags": ["UI/UX", "Performance"],
+    "designNotes": "Brand visuals, dark/light mode typography, motion guidelines; legibility focus.",
+    "designTags": ["Design System", "Dark Mode"],
+    "typography": "Inter/UI - 16px base, 1.5x line height",
+    "designAssets": ["dark-mode-guide.pdf"]
+  }
+]

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio - DAVE_K</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Home">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span class="logo-text">DAVE_K</span>
+      </a>
+      <nav class="main-nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html" class="active">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button id="theme-toggle" class="btnicon" aria-label="Toggle theme">🌓</button>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <section class="portfolio">
+      <h1>Portfolio</h1>
+
+      <div id="dev-projects">
+        <h2 class="portfolio-heading">Web Development</h2>
+        <div id="dev-grid" class="grid"></div>
+      </div>
+
+      <div id="design-projects">
+        <h2 class="portfolio-heading">Graphic Design</h2>
+        <div id="design-grid" class="grid"></div>
+        <div style="margin-top: 32px; text-align: center;">
+          <a href="https://drive.google.com/drive/folders/1CgHsvLGQdMBdJhbQ38v-ONLElvS7JqBz?usp=drive_link" target="_blank" class="btn secondary">View More Designs on Drive</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy;DAVE_K</p>
+    </div>
+  </footer>
+
+  <script src="js/portfolioData.js"></script>
+  <script src="js/main.js"></script>
+  <script type="module" src="js/portfolio.js"></script>
+</body>
+</html>
