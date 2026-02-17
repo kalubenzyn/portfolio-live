@@ -16,6 +16,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// Simple health check endpoint to keep the server awake
+app.get('/ping', (req, res) => {
+  res.status(200).send('pong');
+});
+
 // Endpoint to handle form submission
 app.post('/send-email', (req, res) => {
   const { name, email, message } = req.body;
