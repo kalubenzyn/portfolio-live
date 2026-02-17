@@ -16,13 +16,19 @@ document.addEventListener('DOMContentLoaded', () => {
       statusDiv.className = '';
 
       try {
+        // Add a timeout controller to stop it from hanging forever
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 seconds timeout
+
         const response = await fetch('/send-email', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data),
+          signal: controller.signal
         });
+        clearTimeout(timeoutId);
 
         // Check if the response is actually JSON before parsing
         const contentType = response.headers.get("content-type");
@@ -40,7 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
           throw new Error(result.message || 'An unknown error occurred.');
         }
       } catch (error) {
-        statusDiv.textContent = `Error: ${error.message}`;
+        if (error.name === 'AbortError') {
+          statusDiv.textContent = 'Error: Server took too long to respond. Please check your connection.';
+        } else {
+          statusDiv.textContent = `Error: ${error.message}`;
+        }
         statusDiv.classList.add('error');
       } finally {
         submitButton.disabled = false;

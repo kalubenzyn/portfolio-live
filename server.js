@@ -25,6 +25,12 @@ app.get('/ping', (req, res) => {
 app.post('/send-email', (req, res) => {
   const { name, email, message } = req.body;
 
+  // Check if credentials exist before trying to send
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    console.error('Error: Missing email credentials in environment variables.');
+    return res.status(500).json({ success: false, message: 'Server Error: Email credentials are missing.' });
+  }
+
   // IMPORTANT: Use environment variables for security.
   // Create a .env file in your root directory with your credentials.
   const transporter = nodemailer.createTransport({
