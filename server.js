@@ -36,9 +36,10 @@ app.post('/send-email', (req, res) => {
   });
 
   const mailOptions = {
-    from: `"${name}" <${email}>`,
+    from: process.env.EMAIL_USER, // Gmail requires the email to be sent FROM your account
     to: 'kaluonyemadavid@gmail.com', // Your receiving email
-    subject: 'New Message from Portfolio Contact Form',
+    replyTo: email, // This ensures when you click "Reply", it goes to the visitor
+    subject: `Portfolio Message from ${name}`,
     text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong></p><p>${message}</p>`,
   };

@@ -24,6 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
           body: JSON.stringify(data),
         });
 
+        // Check if the response is actually JSON before parsing
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+           throw new Error("Server connection failed. Please try again.");
+        }
+
         const result = await response.json();
 
         if (response.ok) {
