@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         // Add a timeout controller to stop it from hanging forever
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 seconds timeout
+        const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 seconds timeout
 
         const response = await fetch('/send-email', {
           method: 'POST',
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       } catch (error) {
         if (error.name === 'AbortError') {
-          statusDiv.textContent = 'Error: Server took too long to respond. Please check your connection.';
+          statusDiv.textContent = 'Request timed out. The server might be waking up. Please try again.';
         } else {
           statusDiv.textContent = `Error: ${error.message}`;
         }
