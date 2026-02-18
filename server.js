@@ -22,42 +22,42 @@ app.get('/ping', (req, res) => {
 });
 
 // Endpoint to handle form submission
-app.post('/send-email', (req, res) => {
+app.post('/send-email', async (req, res) => {
   const { name, email, message } = req.body;
+  console.log(`Received form submission: Name - ${name}, Email - ${email}`);
 
   // Check if credentials exist before trying to send
   if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    console.error('Error: Missing email credentials in environment variables.');
+    console.error('SERVER FATAL: Missing EMAIL_USER or EMAIL_PASS in environment variables.');
     return res.status(500).json({ success: false, message: 'Server Error: Email credentials are missing.' });
   }
 
-  // IMPORTANT: Use environment variables for security.
-  // Create a .env file in your root directory with your credentials.
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: process.env.EMAIL_USER, // Your Gmail address
-      pass: process.env.EMAIL_PASS ? process.env.EMAIL_PASS.replace(/\s+/g, '') : '', // Your Gmail App Password (removes spaces)
+      pass: process.env.EMAIL_PASS.replace(/\s+/g, ''), // Your Gmail App Password (removes spaces)
     },
   });
 
   const mailOptions = {
     from: process.env.EMAIL_USER, // Gmail requires the email to be sent FROM your account
     to: 'kaluonyemadavid@gmail.com', // Your receiving email
-    replyTo: email, // This ensures when you click "Reply", it goes to the visitor
+    replyTo: email, // This ensures when you click "Reply," it goes to the visitor
     subject: `Portfolio Message from ${name}`,
     text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong></p><p>${message}</p>`,
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error('Error sending email:', error);
-      return res.status(500).json({ success: false, message: 'Failed to send message.' });
-    }
-    console.log('Message sent: %s', info.messageId);
+  try {
+    console.log('Attempting to send email via nodemailer...');
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully! Message ID:', info.messageId);
     res.status(200).json({ success: true, message: 'Message sent successfully!' });
-  });
+  } catch (error) {
+    console.error('NODEMAILER ERROR:', error);
+    res.status(500).json({ success: false, message: 'Server failed to send email.' });
+  }
 });
 
 app.listen(PORT, () => {
